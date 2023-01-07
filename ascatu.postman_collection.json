@@ -1,0 +1,424 @@
+{
+	"info": {
+		"_postman_id": "b91730ca-998f-4494-b92e-286955dd7f1f",
+		"name": "ascatu",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "13106891"
+	},
+	"item": [
+		{
+			"name": "dev-challenge",
+			"item": [
+				{
+					"name": "Person",
+					"item": [
+						{
+							"name": "Get Person",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://{{localhost}}/{{resource}}",
+									"protocol": "http",
+									"host": [
+										"{{localhost}}"
+									],
+									"path": [
+										"{{resource}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Person ID",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://{{localhost}}/{{resource}}/{{examplePersonID}}",
+									"protocol": "http",
+									"host": [
+										"{{localhost}}"
+									],
+									"path": [
+										"{{resource}}",
+										"{{examplePersonID}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create Person",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"city\": \"Berlin\",\r\n  \"country\": \"Germany\",\r\n  \"extensionFields\": {},\r\n  \"firstName\": \"John\",\r\n  \"houseNumber\": \"42\",\r\n  \"id\": \"1060f9e4-be45-4516-bb71-5cd97c304254\",\r\n  \"lastName\": \"Doe\",\r\n  \"streetAddress\": \"Street\",\r\n  \"zip\": \"10115\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://{{localhost}}/{{resource}}",
+									"protocol": "http",
+									"host": [
+										"{{localhost}}"
+									],
+									"path": [
+										"{{resource}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Patch Person",
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"id\": \"1060f9e4-be45-4516-bb71-5cd97c304254\",\r\n  \"firstName\": \"Doe\",\r\n  \"lastName\": \"John\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://{{localhost}}/{{resource}}/{{examplePersonID}}",
+									"protocol": "http",
+									"host": [
+										"{{localhost}}"
+									],
+									"path": [
+										"{{resource}}",
+										"{{examplePersonID}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Person",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"firstName\": \"Doe\",\r\n  \"id\": \"1060f9e4-be45-4516-bb71-5cd97c304254\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://{{localhost}}/{{resource}}/{{examplePersonID}}",
+									"protocol": "http",
+									"host": [
+										"{{localhost}}"
+									],
+									"path": [
+										"{{resource}}",
+										"{{examplePersonID}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Remove Person",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "http://{{localhost}}/{{resource}}/{{examplePersonID}}",
+									"protocol": "http",
+									"host": [
+										"{{localhost}}"
+									],
+									"path": [
+										"{{resource}}",
+										"{{examplePersonID}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Evaporate",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "http://{{localhost}}/{{resource}}",
+									"protocol": "http",
+									"host": [
+										"{{localhost}}"
+									],
+									"path": [
+										"{{resource}}"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"pm.environment.set(\"localhost\", \"localhost:8080\");",
+									"pm.environment.set(\"examplePersonID\", \"1060f9e4-be45-4516-bb71-5cd97c304254\")",
+									"pm.environment.set(\"resource\", \"api/v1/person\");",
+									"",
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"// const host = pm.environment.get(\"localhost\");",
+									"// const resource = pm.environment.get(\"resource\");",
+									"// pm.sendRequest(host, function (err, response) {",
+									"//     console.log(response.json());",
+									"// });"
+								]
+							}
+						}
+					]
+				},
+				{
+					"name": "Order",
+					"item": [
+						{
+							"name": "Get Order",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://{{localhost}}/api/v1/order",
+									"protocol": "http",
+									"host": [
+										"{{localhost}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"order"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get an Order",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://{{localhost}}/api/v1/order/{{examplePersonID}}",
+									"protocol": "http",
+									"host": [
+										"{{localhost}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"order",
+										"{{examplePersonID}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create Order",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"orderDate\": \"2021-07-17\",\r\n    \"soldToID\": \"1060f9e4-be45-4516-bb71-5cd97c304254\",\r\n    \"billToID\": \"1060f9e4-be45-4516-bb71-5cd97c304254\",\r\n    \"shipToID\": \"1060f9e4-be45-4516-bb71-5cd97c304254\",\r\n    \"orderValue\": 107.26,\r\n    \"taxValue\": 10.1,\r\n    \"currencyCode\": \"CHF\",\r\n    \"items\": [\r\n        {\r\n            \"itemID\": \"0001\",\r\n            \"productID\": \"100000101\",\r\n            \"quantity\": 5,\r\n            \"itemPrice\": 21.5\r\n        }\r\n    ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://{{localhost}}/api/v1/order",
+									"protocol": "http",
+									"host": [
+										"{{localhost}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"order"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Change Order",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"orderDate\": \"2021-07-17\",\r\n    \"soldToID\": {\r\n        \"city\": \"Berlin\",\r\n        \"country\": \"Germany\",\r\n        \"extensionFields\": {},\r\n        \"firstName\": \"John\",\r\n        \"houseNumber\": \"42\",\r\n        \"id\": \"1060f9e4-be45-4516-bb71-5cd97c304254\",\r\n        \"lastName\": \"Doe\",\r\n        \"streetAddress\": \"Street\",\r\n        \"zip\": \"10115\"\r\n    },\r\n    \"billToID\": {\r\n        \"city\": \"Berlin\",\r\n        \"country\": \"Germany\",\r\n        \"extensionFields\": {},\r\n        \"firstName\": \"John\",\r\n        \"houseNumber\": \"42\",\r\n        \"id\": \"1060f9e4-be45-4516-bb71-5cd97c304254\",\r\n        \"lastName\": \"Doe\",\r\n        \"streetAddress\": \"Street\",\r\n        \"zip\": \"10115\"\r\n    },\r\n    \"shipToID\": {\r\n        \"city\": \"Berlin\",\r\n        \"country\": \"Germany\",\r\n        \"extensionFields\": {},\r\n        \"firstName\": \"John\",\r\n        \"houseNumber\": \"42\",\r\n        \"id\": \"1060f9e4-be45-4516-bb71-5cd97c304254\",\r\n        \"lastName\": \"Doe\",\r\n        \"streetAddress\": \"Street\",\r\n        \"zip\": \"10115\"\r\n    },\r\n    \"orderValue\": 100\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://{{localhost}}/api/v1/order/{{examplePersonID}}",
+									"protocol": "http",
+									"host": [
+										"{{localhost}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"order",
+										"{{examplePersonID}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Change Order",
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"orderDate\": \"2021-07-17\",\r\n    \"soldToID\": {\r\n        \"city\": \"Berlin\",\r\n        \"country\": \"Germany\",\r\n        \"extensionFields\": {},\r\n        \"firstName\": \"John\",\r\n        \"houseNumber\": \"42\",\r\n        \"id\": \"1060f9e4-be45-4516-bb71-5cd97c304254\",\r\n        \"lastName\": \"Doe\",\r\n        \"streetAddress\": \"Street\",\r\n        \"zip\": \"10115\"\r\n    },\r\n    \"billToID\": {\r\n        \"city\": \"Berlin\",\r\n        \"country\": \"Germany\",\r\n        \"extensionFields\": {},\r\n        \"firstName\": \"John\",\r\n        \"houseNumber\": \"42\",\r\n        \"id\": \"1060f9e4-be45-4516-bb71-5cd97c304254\",\r\n        \"lastName\": \"Doe\",\r\n        \"streetAddress\": \"Street\",\r\n        \"zip\": \"10115\"\r\n    },\r\n    \"shipToID\": {\r\n        \"city\": \"Berlin\",\r\n        \"country\": \"Germany\",\r\n        \"extensionFields\": {},\r\n        \"firstName\": \"John\",\r\n        \"houseNumber\": \"42\",\r\n        \"id\": \"1060f9e4-be45-4516-bb71-5cd97c304254\",\r\n        \"lastName\": \"Doe\",\r\n        \"streetAddress\": \"Street\",\r\n        \"zip\": \"10115\"\r\n    },\r\n    \"orderValue\": 107.26\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://{{localhost}}/api/v1/order/{{examplePersonID}}",
+									"protocol": "http",
+									"host": [
+										"{{localhost}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"order",
+										"{{examplePersonID}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete Order",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "http://{{localhost}}/api/v1/order/{{examplePersonID}}",
+									"protocol": "http",
+									"host": [
+										"{{localhost}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"order",
+										"{{examplePersonID}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Evaporate Orders",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "http://{{localhost}}/api/v1/order/{{examplePersonID}}",
+									"protocol": "http",
+									"host": [
+										"{{localhost}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"order",
+										"{{examplePersonID}}"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"pm.environment.set(\"localhost\", \"localhost:8081\");",
+									"// pm.environment.set(\"localhost\", \"localhost:8082\");",
+									"pm.environment.set(\"examplePersonID\", \"1060f9e4-be45-4516-bb71-5cd97c304254\");"
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						}
+					]
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"pm.environment.set(\"localhost\", \"localhost:8080\");"
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		}
+	]
+}

@@ -1,0 +1,131 @@
+version: "3"
+services:
+  contact-person-service:
+    build:
+      context: ./contact-person-service
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    networks:
+      - node-networks
+    depends_on:
+      - zookeeper
+      - kafka
+      - mongodb
+    environment:
+      KAFKA_MESSAGE_URL: 'http://host.docker.internal:3000/send-message'
+  order-service:
+    build:
+      context: ./order-service
+      dockerfile: Dockerfile
+    ports:
+      - "8081:8081"
+    networks:
+      - node-networks
+    depends_on:
+      - zookeeper
+      - kafka
+      - mongodb
+    environment:
+      KAFKA_BROKER0: kafka:9092
+      KAFKA_BROKER1: kafka:29092
+      KAFKA_MESSAGE_URL: 'http://host.docker.internal:3000/send-message'
+      PERSON_SERVICE: 'http://host.docker.internal:8080/api/v1/person/'
+  kafka-service:
+    build:
+      context: ./kafka-service
+      dockerfile: Dockerfile
+    environment:
+      KAFKA_HOST: kafka
+      KAFKA_PORT: 9092
+    ports:
+      - "3000:3000"
+    networks:
+      - node-networks
+    depends_on:
+      - zookeeper
+      - kafka
+    restart: always
+
+    ### ===================
+    ### ZOOKEEPER SERVICE  https://github.com/restuwahyu13/node-kafka
+    ### ===================
+  zookeeper:
+    image: confluentinc/cp-zookeeper:latest
+    restart: always
+    healthcheck:
+      interval: 120ms
+      retries: 5
+      test: |
+        touch /tmp/healthcheck.txt &&
+        mkdir /tmp/healthcheck &&
+        mv /tmp/healthcheck.txt /tmp/healthcheck &&
+        cd /tmp/healthcheck &&
+        echo "hello my docker container is working fine" >> healthcheck.txt &&
+        cat healthcheck.txt &&
+        sleep 3 &&
+        rm "${PWD}/healthcheck.txt" &&
+        cd .. &&
+        sleep 3 &&
+        rmdir "${PWD}/healthcheck" &&
+        clear
+      timeout: 30ms
+    environment:
+      ZOOKEEPER_SERVER_ID: 1
+      ZOOKEEPER_CLIENT_PORT: 2181
+      ZOOKEEPER_TICK_TIMES: 2000
+    ports:
+      - 2181:2181
+    networks:
+      - node-networks
+  ### ====================
+  ### KAFKA SERVICE  https://github.com/restuwahyu13/node-kafka
+  ### ====================
+  kafka:
+    image: confluentinc/cp-kafka:latest
+    restart: always
+    healthcheck:
+      interval: 120ms
+      retries: 5
+      test: |
+        touch /tmp/healthcheck.txt &&
+        mkdir /tmp/healthcheck &&
+        mv /tmp/healthcheck.txt /tmp/healthcheck &&
+        cd /tmp/healthcheck &&
+        echo "hello my docker container is working fine" >> healthcheck.txt &&
+        cat healthcheck.txt &&
+        sleep 3 &&
+        rm "${PWD}/healthcheck.txt" &&
+        cd .. &&
+        sleep 3 &&
+        rmdir "${PWD}/healthcheck" &&
+        clear
+      timeout: 30ms
+    environment:
+      KAFKA_BROKER_ID: 1
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092,PLAINTEXT_HOST://kafka:29092
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
+      KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_ADVERTISED_HOST_NAME: kafka
+    ports:
+      - 9092:9092
+    networks:
+      - node-networks
+    depends_on:
+      - zookeeper
+
+  # I CAN'T IMPLEMENT BUT IT IS READY
+  mongodb:
+    image: mongo:latest
+    ports:
+      - "27017:27017"
+    networks:
+      - node-networks
+
+### ===================================
+### NETWORKS GROUP FOR ONE SAME SERVICE
+### ===================================
+networks:
+  node-networks:
